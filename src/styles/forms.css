@@ -1,0 +1,63 @@
+.form-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.field-group {
+  display: grid;
+  gap: 8px;
+}
+
+.field-label {
+  color: var(--text-soft);
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.field-input,
+.field-select,
+.field-textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field-textarea {
+  min-height: 120px;
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+.field-input:focus,
+.field-select:focus,
+.field-textarea:focus {
+  border-color: var(--gold-3);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.field-input::placeholder,
+.field-textarea::placeholder {
+  color: var(--text-dim);
+}
+
+/* Hide number input spinners for calculator plain inputs */
+.calc-plain-num::-webkit-inner-spin-button,
+.calc-plain-num::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.calc-plain-num { -moz-appearance: textfield; }
+
+/* Remove focus ring on calculator inputs */
+.calc-plain-num:focus,
+.calc-plain-num:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}

@@ -1,0 +1,86 @@
+:root {
+  --bg-main: #111827;
+  --bg-card: rgba(31, 41, 55, 0.55);
+  --bg-input: rgba(17, 24, 39, 0.75);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(245, 158, 11, 0.22);
+  --text-main: #f3f4f6;
+  --text-secondary: rgba(243, 244, 246, 0.65);
+  --accent: #f59e0b;
+  --accent-soft: rgba(245, 158, 11, 0.15);
+  --success: #22c55e;
+  --danger: #fb923c;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  --blur: blur(28px);
+  --radius-xl: 32px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  background:
+    linear-gradient(rgba(10, 15, 25, 0.45), rgba(10, 15, 25, 0.75)),
+    url('/images/mining-blur.jpg') center center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.loss-calculator {
+  width: 100%;
+  max-width: 1440px;
+  background: var(--bg-card);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.calculator-left,
+.calculator-right {
+  padding: 48px;
+}
+
+.calculator-left {
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.calculator-title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0 0 12px;
+  letter-spacing: -0.03em;
+}
+
+.calculator-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+}
+
+.form-card {
+  background: rgba(17, 24, 39, 0.38);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+.form-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(243, 244, 246, 0.8);
+  margin-bottom: 28px;
+}
+}

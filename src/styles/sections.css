@@ -1,0 +1,64 @@
+.section-imperial {
+  position: relative;
+  padding: 116px 0 100px;
+  background: rgba(8, 6, 3, 0.30);
+}
+
+.section-frame {
+  position: relative;
+  padding: 48px 34px;
+}
+
+.section-frame::before,
+.section-frame::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-mid), transparent);
+  z-index: 2;
+}
+.section-frame::before { top: 0; }
+.section-frame::after  { bottom: 0; }
+
+/* ── Статистика ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.stat-box {
+  text-align: center;
+  padding: 26px 20px;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-box:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: var(--gold-glow);
+}
+
+.stat-value {
+  margin-bottom: 8px;
+  font-family: "Cinzel", serif;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold-5), var(--gold-3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  color: var(--text-dim);
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
