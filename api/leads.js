@@ -22,7 +22,7 @@ export default async function handler(req, res) {
   const text = [
     '<b>Новая заявка — Imperial Parts Group</b>',
     '',
-    `b>Имя:</b> ${name}`,
+    `<b>Имя:</b> ${name}`,
     company ? `<b>Компания:</b> ${company}` : null,
     `<b>Телефон:</b> ${phone}`,
     email   ? `<b>Email:</b> ${email}`        : null,
