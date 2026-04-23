@@ -310,7 +310,7 @@ export default function Calculator() {
   }
 
   return (
-    <section id="calculator" className="section-imperial">
+    <section id="calculator" className="section-imperial" style={{ paddingTop: '3rem' }}>
       <style>{`
         @media (max-width: 1599px) {
           .calc-pane-l, .calc-pane-r { padding: 12px !important; }

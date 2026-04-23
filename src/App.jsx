@@ -49,7 +49,7 @@ function App() {
       <Hero />
 
       {[About, Categories, Calculator, Analytics, WhyUs, ContactForm].map((Section, i) => (
-        <div key={i} style={{ position: 'relative' }}>
+        <div key={i} style={{ position: 'relative', isolation: 'isolate', paddingBottom: '2rem' }}>
           <div style={{ position: 'absolute', top: -16, left: 0, right: 0, zIndex: 10 }}>
             <SectionDivider />
           </div>

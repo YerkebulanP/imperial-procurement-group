@@ -98,7 +98,7 @@ export default function Categories() {
   ]
 
   return (
-    <section id="categories" className="section-imperial">
+    <section id="categories" className="section-imperial" style={{ paddingBottom: '4rem' }}>
       <div className="container">
 
         {/* Header */}
