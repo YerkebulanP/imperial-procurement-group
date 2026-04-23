@@ -1,45 +1,14 @@
 import { useState, useEffect } from 'react'
+import imperialLogo from '/imperial-logo.png'
 
 const navLinks = [
   { label: 'О компании',  href: '#about',      id: 'about' },
   { label: 'Услуги',      href: '#categories', id: 'categories' },
   { label: 'Калькулятор', href: '#calculator', id: 'calculator' },
   { label: 'Аналитика',   href: '#analytics',  id: 'analytics' },
-  { label: 'Почему мы?',   href: '#whyus',      id: 'whyus' },
+  { label: 'Почему мы?',  href: '#whyus',      id: 'whyus' },
   { label: 'Контакты',    href: '#contact',    id: 'contact' },
 ]
-
-function IPGShield({ size = 44 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Shield shape */}
-      <path
-        d="M22 2L4 9V22C4 31.5 12 39.5 22 42C32 39.5 40 31.5 40 22V9L22 2Z"
-        fill="rgba(197,160,89,0.12)"
-        stroke="#C5A059"
-        strokeWidth="1.2"
-      />
-      {/* Inner shield border */}
-      <path
-        d="M22 5L7 11V22C7 30 13.5 37 22 39.5C30.5 37 37 30 37 22V11L22 5Z"
-        fill="none"
-        stroke="rgba(197,160,89,0.35)"
-        strokeWidth="0.6"
-      />
-      {/* IPG text */}
-      <text
-        x="22" y="24"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        fontFamily="Cinzel, serif"
-        fontSize="9"
-        fontWeight="700"
-        fill="#C5A059"
-        letterSpacing="1"
-      >IPG</text>
-    </svg>
-  )
-}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -83,23 +52,22 @@ export default function Navbar() {
       backdropFilter: scrolled ? 'blur(12px)' : 'none',
       borderBottom: scrolled ? '1px solid rgba(197,160,89,0.15)' : 'none',
     }}>
-      <div style={{
+      <div className="nav-inner" style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0.85rem 3.5rem',
         maxWidth: '1400px',
         margin: '0 auto',
       }}>
 
         {/* Logo */}
-        <a href="#hero" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
-          <IPGShield size={46} />
+        <a href="#hero" className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', flexShrink: 0 }}>
+          <img src={imperialLogo} alt="Imperial Logo" className="nav-logo-img" style={{ width: 'auto', objectFit: 'contain' }} />
           <div style={{ lineHeight: 1 }}>
-            <div style={{ fontFamily: 'Cinzel, serif', color: '#C5A059', fontSize: '13px', letterSpacing: '0.28em', fontWeight: 700 }}>
+            <div className="nav-logo-title" style={{ fontFamily: 'Cinzel, serif', color: '#C5A059', fontWeight: 700 }}>
               IMPERIAL
             </div>
-            <div style={{ fontFamily: 'Cinzel, serif', color: 'rgba(197,160,89,0.5)', fontSize: '8px', letterSpacing: '0.22em', marginTop: '2px' }}>
+            <div className="nav-logo-sub" style={{ fontFamily: 'Cinzel, serif', color: 'rgba(197,160,89,0.5)', marginTop: '2px' }}>
               PROCUREMENT GROUP
             </div>
           </div>
@@ -112,27 +80,26 @@ export default function Navbar() {
             return (
               <li key={link.id} style={{ display: 'flex', alignItems: 'center' }}>
                 {i > 0 && (
-                  <span style={{ color: 'rgba(197,160,89,0.25)', fontSize: '14px', margin: '0 4px' }}>|</span>
+                  <span style={{ color: 'rgba(197,160,89,0.25)', fontSize: '12px', margin: '0 2px' }}>|</span>
                 )}
                 <a
                   href={link.href}
+                  className="nav-link-a"
                   style={{
                     fontFamily: 'Cinzel, serif',
-                    fontSize: '11px',
-                    letterSpacing: '0.12em',
                     textTransform: 'uppercase',
                     textDecoration: 'none',
                     color: isActive ? '#C5A059' : 'rgba(232,217,176,0.65)',
-                    padding: '8px 16px',
                     position: 'relative',
                     transition: 'color 0.25s',
+                    whiteSpace: 'nowrap',
                   }}
                   onMouseEnter={e => { e.currentTarget.style.color = '#C5A059' }}
                   onMouseLeave={e => { e.currentTarget.style.color = isActive ? '#C5A059' : 'rgba(232,217,176,0.65)' }}
                 >
                   {link.label}
                   <span style={{
-                    position: 'absolute', bottom: 2, left: '16px', right: '16px',
+                    position: 'absolute', bottom: 1, left: 0, right: 0,
                     height: '1px', background: '#C5A059',
                     transition: 'opacity 0.25s',
                     opacity: isActive ? 1 : 0,
@@ -148,22 +115,25 @@ export default function Navbar() {
           href="#contact"
           className="nav-cta"
           style={{
-            fontFamily: 'Cinzel, serif', fontSize: '10px',
-            letterSpacing: '0.18em', textTransform: 'uppercase',
-            textDecoration: 'none', color: '#0d0a08',
+            fontFamily: 'Cinzel, serif',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+            color: '#0d0a08',
             background: '#C5A059',
             border: '1px solid rgba(197,160,89,0.5)',
-            padding: '10px 22px',
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
           }}
         >
           Начать экспансию
         </a>
 
-        {/* Mobile burger */}
+        {/* Burger */}
         <button
           className="nav-burger"
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', color: '#C5A059' }}
+          style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', color: '#C5A059', padding: '4px' }}
         >
           <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {menuOpen
@@ -173,28 +143,115 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile / tablet dropdown menu */}
       {menuOpen && (
-        <div style={{ background: 'rgba(13,10,8,0.98)', borderTop: '1px solid rgba(197,160,89,0.15)', padding: '1.5rem 2rem' }}>
-          <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={{ background: 'rgba(13,10,8,0.98)', borderTop: '1px solid rgba(197,160,89,0.15)', padding: '1.25rem 1.5rem' }}>
+          <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
             {navLinks.map(link => (
               <li key={link.id}>
-                <a href={link.href} onClick={() => setMenuOpen(false)}
-                  style={{ fontFamily: 'Cinzel, serif', fontSize: '12px', letterSpacing: '0.15em', textTransform: 'uppercase', textDecoration: 'none', color: active === link.id ? '#C5A059' : 'rgba(232,217,176,0.6)' }}
+                <a
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    fontFamily: 'Cinzel, serif',
+                    fontSize: '12px',
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    color: active === link.id ? '#C5A059' : 'rgba(232,217,176,0.6)',
+                  }}
                 >
                   {link.label}
                 </a>
               </li>
             ))}
+            <li style={{ marginTop: '0.5rem', paddingTop: '0.85rem', borderTop: '1px solid rgba(197,160,89,0.12)' }}>
+              <a
+                href="#contact"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  display: 'inline-block',
+                  fontFamily: 'Cinzel, serif',
+                  fontSize: '10px',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  color: '#0d0a08',
+                  background: '#C5A059',
+                  padding: '10px 20px',
+                }}
+              >
+                Начать экспансию
+              </a>
+            </li>
           </ul>
         </div>
       )}
 
       <style>{`
-        @media (max-width: 900px) {
-          .nav-links { display: none !important; }
-          .nav-cta   { display: none !important; }
-          .nav-burger { display: flex !important; }
+        /* ── База: стандартный ПК / FullHD 1080p ── */
+        .nav-inner      { padding: 0.85rem 2.5rem; }
+        .nav-logo-img   { height: 42px; }
+        .nav-logo-title { font-size: 13px; letter-spacing: 0.26em; }
+        .nav-logo-sub   { font-size: 8px;  letter-spacing: 0.18em; }
+        .nav-link-a     { font-size: 11px; padding: 8px 12px; letter-spacing: 0.11em; }
+        .nav-cta        { font-size: 10px; padding: 10px 20px; }
+
+        /* ── XL монитор / 2K-4K (≥ 1600px) ── */
+        @media (min-width: 1600px) {
+          .nav-inner      { padding: 1.2rem 3.5rem; }
+          .nav-logo-img   { height: 58px; }
+          .nav-logo-title { font-size: 15px; letter-spacing: 0.30em; }
+          .nav-logo-sub   { font-size: 9px;  letter-spacing: 0.24em; }
+          .nav-link-a     { font-size: 12px; padding: 10px 16px; letter-spacing: 0.13em; }
+          .nav-cta        { font-size: 11px; padding: 12px 26px; }
+        }
+
+        /* ── Ноутбук / HD (1024px – 1279px) ── */
+        @media (max-width: 1279px) {
+          .nav-inner      { padding: 0.7rem 2rem; }
+          .nav-logo-img   { height: 36px; }
+          .nav-logo-title { font-size: 11px; letter-spacing: 0.20em; }
+          .nav-logo-sub   { font-size: 7px;  letter-spacing: 0.14em; }
+          .nav-link-a     { font-size: 9.5px; padding: 7px 10px; letter-spacing: 0.08em; }
+          .nav-cta        { font-size: 9px;  padding: 8px 15px; }
+        }
+
+        /* ── Маленький ноутбук / iPad landscape (900px – 1023px) ── */
+        @media (max-width: 1023px) {
+          .nav-inner      { padding: 0.6rem 1.5rem; }
+          .nav-logo-img   { height: 32px; }
+          .nav-logo-title { font-size: 10px; letter-spacing: 0.16em; }
+          .nav-logo-sub   { font-size: 6px;  letter-spacing: 0.12em; }
+          .nav-link-a     { font-size: 8.5px; padding: 6px 7px; letter-spacing: 0.06em; }
+          .nav-cta        { font-size: 8px;  padding: 7px 11px; }
+        }
+
+        /* ── Планшет / iPad portrait (≤ 899px) — бургер ── */
+        @media (max-width: 899px) {
+          .nav-links  { display: none !important; }
+          .nav-cta    { display: none !important; }
+          .nav-burger { display: flex !important; align-items: center; }
+          .nav-inner      { padding: 0.6rem 1.75rem; }
+          .nav-logo-img   { height: 34px; }
+          .nav-logo-title { font-size: 11px; letter-spacing: 0.22em; }
+          .nav-logo-sub   { font-size: 7px; letter-spacing: 0.18em; }
+        }
+
+        /* ── Большой телефон / phablet (≤ 767px) ── */
+        @media (max-width: 767px) {
+          .nav-inner      { padding: 0.55rem 1.25rem; }
+          .nav-logo-img   { height: 30px; }
+          .nav-logo-title { font-size: 10px; letter-spacing: 0.2em; }
+          .nav-logo-sub   { font-size: 6.5px; letter-spacing: 0.15em; }
+        }
+
+        /* ── Маленький мобильный (≤ 479px) ── */
+        @media (max-width: 479px) {
+          .nav-inner      { padding: 0.55rem 1rem; }
+          .nav-logo-img   { height: 28px; }
+          .nav-logo-title { font-size: 10px; letter-spacing: 0.18em; }
+          .nav-logo-sub   { display: none; }
         }
       `}</style>
     </nav>

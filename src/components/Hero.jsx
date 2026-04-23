@@ -58,7 +58,7 @@ export default function Hero() {
         <div className="container hero-text" style={{ padding: '8rem 20px 0', textAlign: 'center' }}>
           <div style={{ maxWidth: '860px', margin: '0 auto' }}>
             <div className="anim" style={{ opacity: 0, transform: 'translateY(20px)', transition: 'all 0.8s ease' }}>
-              <h1 className="section-title" style={{ fontSize: 'clamp(1.8rem, 4.2vw, 58px)', marginBottom: 0, fontWeight: 900 }}>
+              <h1 className="section-title" style={{ fontSize: 'clamp(1.6rem, 2.8vw, 44px)', marginBottom: 0, fontWeight: 900 }}>
                 Imperial Procurement Group
               </h1>
             </div>

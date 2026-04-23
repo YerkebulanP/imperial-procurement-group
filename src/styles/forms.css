@@ -1,17 +1,17 @@
 .form-grid {
   display: grid;
-  gap: 18px;
+  gap: 10px;
 }
 
 .field-group {
   display: grid;
-  gap: 8px;
+  gap: 5px;
 }
 
 .field-label {
   color: var(--text-soft);
   font-family: "Montserrat", sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.04em;
 }
@@ -20,21 +20,21 @@
 .field-select,
 .field-textarea {
   width: 100%;
-  min-height: 50px;
-  padding: 0 16px;
+  min-height: 40px;
+  padding: 0 14px;
   border-radius: var(--radius-md);
   border: 1px solid rgba(212, 175, 55, 0.2);
   background: var(--bg-card);
   color: var(--text-main);
   font-family: "Montserrat", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .field-textarea {
-  min-height: 120px;
-  padding: 14px 16px;
+  min-height: 80px;
+  padding: 10px 14px;
   resize: vertical;
 }
 

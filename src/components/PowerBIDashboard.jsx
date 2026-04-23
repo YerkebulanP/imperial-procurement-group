@@ -106,9 +106,9 @@ function DonutLabel({ cx, cy, midAngle, innerRadius, outerRadius, percent }) {
 /* ── KPI card ── */
 function KpiCard({ value, label, color = GOLD }) {
   return (
-    <div style={{ background: 'rgba(212,175,55,0.08)', border: `1px solid rgba(212,175,55,0.2)`, borderRadius: 8, padding: '14px 18px', minWidth: 140 }}>
-      <div style={{ fontFamily: 'Cinzel, serif', fontSize: 28, fontWeight: 700, color, lineHeight: 1 }}>{value}</div>
-      <div style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 11, color: 'rgba(212,175,55,0.6)', marginTop: 4 }}>{label}</div>
+    <div style={{ background: 'rgba(212,175,55,0.08)', border: `1px solid rgba(212,175,55,0.2)`, borderRadius: 8, padding: '8px 12px' }}>
+      <div style={{ fontFamily: 'Cinzel, serif', fontSize: 20, fontWeight: 700, color, lineHeight: 1 }}>{value}</div>
+      <div style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 10, color: 'rgba(212,175,55,0.6)', marginTop: 3 }}>{label}</div>
     </div>
   )
 }
@@ -116,7 +116,7 @@ function KpiCard({ value, label, color = GOLD }) {
 /* ── checkbox ── */
 function Chk({ label, checked, onChange, indent = false }) {
   return (
-    <label style={{ display: 'flex', alignItems: 'center', gap: 7, cursor: 'pointer', paddingLeft: indent ? 14 : 0, marginBottom: 5 }}>
+    <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', paddingLeft: indent ? 12 : 0, marginBottom: 3 }}>
       <div onClick={onChange} style={{
         width: 14, height: 14, border: `1px solid ${checked ? GOLD : 'rgba(212,175,55,0.3)'}`,
         background: checked ? GOLD : 'transparent', borderRadius: 2, flexShrink: 0,
@@ -145,6 +145,7 @@ export default function PowerBIDashboard() {
   const [shift, setShift] = useState(1)
   const [dateFrom, setDateFrom] = useState('2025-11-01')
   const [dateTo,   setDateTo]   = useState('2025-11-30')
+  const [activeTab, setActiveTab] = useState(0)
 
   const toggleCompany = (c) => setCompanies(p => ({ ...p, [c]: !p[c] }))
   const toggleCat = (i) => { setCatChecked(p => ({ ...p, [i]: !p[i] })); setCatOpen(p => ({ ...p, [i]: !p[i] })) }
@@ -204,7 +205,7 @@ export default function PowerBIDashboard() {
     background: 'rgba(12,9,5,0.80)',
     border: '1px solid rgba(212,175,55,0.15)',
     borderRadius: 10,
-    padding: '1rem',
+    padding: '0.45rem 0.55rem',
   }
 
   return (
@@ -212,8 +213,8 @@ export default function PowerBIDashboard() {
       <div className="container">
 
         {/* Section header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <p style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: '10px', letterSpacing: '0.5em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '0.3rem' }}>
+          <p style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: '10px', letterSpacing: '0.5em', textTransform: 'uppercase', marginBottom: '0.3rem' }}>
             Данные и статистика
           </p>
           <h2 className="section-title">Аналитика Imperial</h2>
@@ -233,14 +234,14 @@ export default function PowerBIDashboard() {
             <span style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(212,175,55,0.4)', fontSize: 10 }}>Последнее обновление: сегодня 08:00</span>
           </div>
 
-          <div style={{ display: 'flex', minHeight: 560 }}>
+          <div style={{ display: 'flex' }}>
 
             {/* ── SIDEBAR ── */}
-            <div style={{ width: 220, flexShrink: 0, background: 'rgba(14,10,5,0.9)', borderRight: '1px solid rgba(212,175,55,0.1)', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem', overflowY: 'auto' }}>
+            <div style={{ width: 200, flexShrink: 0, background: 'rgba(14,10,5,0.9)', borderRight: '1px solid rgba(212,175,55,0.1)', padding: '0.65rem', display: 'flex', flexDirection: 'column', gap: '0.55rem', overflowY: 'auto' }}>
 
               {/* Date */}
               <div>
-                <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: 8 }}>Период</div>
+                <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: 5 }}>Период</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {[['от', dateFrom, setDateFrom], ['до', dateTo, setDateTo]].map(([lbl, val, set]) => (
                     <div key={lbl} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -254,13 +255,13 @@ export default function PowerBIDashboard() {
 
               {/* Companies */}
               <div>
-                <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: 8 }}>Местоположение</div>
+                <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: 5 }}>Местоположение</div>
                 {COMPANIES.map(c => <Chk key={c} label={c} checked={companies[c]} onChange={() => toggleCompany(c)} />)}
               </div>
 
               {/* Shift */}
               <div>
-                <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: 8 }}>Смена</div>
+                <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: 5 }}>Смена</div>
                 <div style={{ display: 'flex', gap: 6 }}>
                   {[1, 2].map(s => (
                     <button key={s} onClick={() => setShift(s)} style={{
@@ -276,7 +277,7 @@ export default function PowerBIDashboard() {
 
               {/* Equipment */}
               <div>
-                <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: 8 }}>Техника</div>
+                <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: 5 }}>Техника</div>
                 {EQUIPMENT_CATS.map((cat, i) => (
                   <div key={i}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 5 }}>
@@ -291,138 +292,98 @@ export default function PowerBIDashboard() {
                 ))}
               </div>
 
-              {/* KPI cards */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 'auto' }}>
-                <KpiCard value={kpiRepair.toLocaleString('ru-RU')} label="Сумма часов ремонта" color="#FF7043" />
-                <KpiCard value={`${kpiMotor} тыс.`} label="Отработанные моточасы" color={GOLD} />
-              </div>
             </div>
 
             {/* ── MAIN CONTENT ── */}
-            <div style={{ flex: 1, padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem', overflowY: 'auto' }}>
+            <div style={{ flex: 1, padding: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', overflowY: 'auto' }}>
 
-              {/* Row 1: Donut charts */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
-
-                {/* Ремонт */}
+              {activeTab === 0 ? (
+                /* ── ВКЛАДКА 1: Часы ремонтных работ ── */
                 <div style={sStyle}>
                   <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 11, letterSpacing: '0.1em', marginBottom: 8 }}>Ремонт</div>
-                  <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-                    {/* Donut */}
-                    <div style={{ flexShrink: 0, width: 200, height: 200 }}>
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <div style={{ flexShrink: 0, width: 128, height: 128 }}>
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
-                          <Pie data={repairData} cx="50%" cy="50%" innerRadius={52} outerRadius={88} dataKey="value" labelLine={false} label={DonutLabel} />
+                          <Pie data={repairData} cx="50%" cy="50%" innerRadius={32} outerRadius={57} dataKey="value" labelLine={false} label={DonutLabel} />
                           <Tooltip content={<DarkTooltip />} />
                         </PieChart>
                       </ResponsiveContainer>
                     </div>
-                    {/* Legend */}
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
                       {repairData.map((d, i) => (
                         <div key={i} style={{
-                          display: 'flex', alignItems: 'center', gap: 10,
-                          padding: '6px 12px',
+                          display: 'flex', alignItems: 'center', gap: 8,
+                          padding: '2px 7px',
                           background: 'rgba(212,175,55,0.04)',
                           border: '1px solid rgba(212,175,55,0.1)',
-                          borderRadius: 6,
+                          borderRadius: 5,
                           borderLeft: `3px solid ${d.fill}`,
                         }}>
-                          <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 11, color: 'rgba(232,217,176,0.8)', flex: 1 }}>{d.name}</span>
-                          <span style={{ fontFamily: 'Cinzel, serif', fontSize: 12, fontWeight: 700, color: d.fill, flexShrink: 0 }}>{d.value}%</span>
+                          <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 10, color: 'rgba(232,217,176,0.8)', flex: 1 }}>{d.name}</span>
+                          <span style={{ fontFamily: 'Cinzel, serif', fontSize: 11, fontWeight: 700, color: d.fill, flexShrink: 0 }}>{d.value}%</span>
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
-
-                {/* Все часы */}
-                <div style={{ ...sStyle, display: 'none' }}>
-                  <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 11, letterSpacing: '0.1em', marginBottom: 8 }}>Все часы · работа · простои</div>
-                  <ResponsiveContainer width="100%" height={160}>
-                    <PieChart>
-                      <Pie data={hoursData} cx="50%" cy="50%" innerRadius={42} outerRadius={72} dataKey="value" labelLine={false} label={DonutLabel} />
-                      <Tooltip content={<DarkTooltip />} />
-                    </PieChart>
-                  </ResponsiveContainer>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 3, marginTop: 4 }}>
-                    {hoursData.map((d, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                        <div style={{ width: 8, height: 8, borderRadius: 2, background: d.fill, flexShrink: 0 }} />
-                        <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 9, color: 'rgba(212,175,55,0.65)', flex: 1 }}>{d.name}</span>
-                        <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 9, color: 'rgba(212,175,55,0.9)' }}>{d.value}%</span>
-                      </div>
-                    ))}
+              ) : (
+                /* ── ВКЛАДКА 2: Моточасы ── */
+                <>
+                  {/* KPI */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                    <div style={{ background: 'rgba(255,112,67,0.10)', border: '1px solid rgba(255,112,67,0.25)', borderRadius: 10, padding: '14px 18px' }}>
+                      <div style={{ fontFamily: 'Cinzel, serif', fontSize: 26, fontWeight: 700, color: '#FF7043', lineHeight: 1 }}>{kpiRepair.toLocaleString('ru-RU')}</div>
+                      <div style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 11, color: 'rgba(255,112,67,0.65)', marginTop: 5 }}>Сумма часов ремонта</div>
+                    </div>
+                    <div style={{ background: 'rgba(212,175,55,0.08)', border: '1px solid rgba(212,175,55,0.25)', borderRadius: 10, padding: '14px 18px' }}>
+                      <div style={{ fontFamily: 'Cinzel, serif', fontSize: 26, fontWeight: 700, color: GOLD, lineHeight: 1 }}>{kpiMotor} тыс.</div>
+                      <div style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 11, color: 'rgba(212,175,55,0.65)', marginTop: 5 }}>Отработанные моточасы</div>
+                    </div>
                   </div>
-                </div>
 
-                {/* Простои */}
-                <div style={{ ...sStyle, display: 'none' }}>
-                  <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 11, letterSpacing: '0.1em', marginBottom: 8 }}>Простои</div>
-                  <ResponsiveContainer width="100%" height={160}>
-                    <PieChart>
-                      <Pie data={downData} cx="50%" cy="50%" innerRadius={42} outerRadius={72} dataKey="value" labelLine={false} label={DonutLabel} />
-                      <Tooltip content={<DarkTooltip />} />
-                    </PieChart>
-                  </ResponsiveContainer>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 3, marginTop: 4 }}>
-                    {downData.map((d, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                        <div style={{ width: 8, height: 8, borderRadius: 2, background: d.fill, flexShrink: 0 }} />
-                        <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 9, color: 'rgba(212,175,55,0.65)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{d.name}</span>
-                        <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 9, color: 'rgba(212,175,55,0.9)' }}>{d.value}%</span>
-                      </div>
-                    ))}
+                  {/* Line chart */}
+                  <div style={{ ...sStyle, flex: 1 }}>
+                    <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 11, letterSpacing: '0.1em', marginBottom: 10 }}>
+                      Отработанные моточасы по дате
+                    </div>
+                    <ResponsiveContainer width="100%" height={200}>
+                      <LineChart data={motorFiltered}>
+                        <CartesianGrid stroke="rgba(212,175,55,0.07)" />
+                        <XAxis dataKey="date" tick={{ fill: 'rgba(212,175,55,0.4)', fontSize: 9, fontFamily: 'Montserrat, sans-serif' }} axisLine={{ stroke: 'rgba(212,175,55,0.1)' }} tickLine={false} interval={Math.floor(motorFiltered.length / 8)} />
+                        <YAxis tick={{ fill: 'rgba(212,175,55,0.4)', fontSize: 9, fontFamily: 'Montserrat, sans-serif' }} axisLine={false} tickLine={false} domain={[90, 200]} />
+                        <Tooltip content={<DarkTooltip />} />
+                        <Line type="monotone" dataKey="value" name="Моточасы" stroke="#4FC3F7" strokeWidth={2} dot={false} activeDot={{ r: 4, fill: '#4FC3F7' }} />
+                      </LineChart>
+                    </ResponsiveContainer>
                   </div>
-                </div>
-
-              </div>
-
-              {/* Row 2: Line chart */}
-              <div style={sStyle}>
-                <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 11, letterSpacing: '0.1em', marginBottom: 12 }}>
-                  Отработанные моточасы по дате
-                </div>
-                <ResponsiveContainer width="100%" height={180}>
-                  <LineChart data={motorFiltered}>
-                    <CartesianGrid stroke="rgba(212,175,55,0.07)" />
-                    <XAxis dataKey="date" tick={{ fill: 'rgba(212,175,55,0.4)', fontSize: 9, fontFamily: 'Montserrat, sans-serif' }} axisLine={{ stroke: 'rgba(212,175,55,0.1)' }} tickLine={false} interval={Math.floor(motorFiltered.length / 8)} />
-                    <YAxis tick={{ fill: 'rgba(212,175,55,0.4)', fontSize: 9, fontFamily: 'Montserrat, sans-serif' }} axisLine={false} tickLine={false} domain={[90, 200]} />
-                    <Tooltip content={<DarkTooltip />} />
-                    <Line type="monotone" dataKey="value" name="Моточасы" stroke="#4FC3F7" strokeWidth={2} dot={false} activeDot={{ r: 4, fill: '#4FC3F7' }} />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
+                </>
+              )}
 
             </div>
           </div>
 
           {/* ── TAB BAR ── */}
-          <div style={{ background: 'rgba(14,10,5,0.95)', borderTop: '1px solid rgba(212,175,55,0.12)', padding: '0 8px' }}>
-            <button style={{
-              padding: '8px 20px', whiteSpace: 'nowrap',
-              fontFamily: 'Montserrat, sans-serif', fontSize: 11, fontWeight: 600,
-              color: GOLD, background: 'transparent', border: 'none', cursor: 'default',
-              borderBottom: `2px solid ${GOLD}`,
-            }}>
-              Часы ремонтных работ
-            </button>
+          <div style={{ background: 'rgba(14,10,5,0.95)', borderTop: '1px solid rgba(212,175,55,0.12)', padding: '0 8px', display: 'flex' }}>
+            {[
+              { i: 0, label: 'Часы ремонтных работ' },
+              { i: 1, label: 'Моточасы' },
+            ].map(({ i, label }) => (
+              <button key={i} onClick={() => setActiveTab(i)} style={{
+                padding: '8px 20px', whiteSpace: 'nowrap',
+                fontFamily: 'Montserrat, sans-serif', fontSize: 11, fontWeight: 600,
+                color: activeTab === i ? GOLD : 'rgba(212,175,55,0.4)',
+                background: 'transparent', border: 'none', cursor: 'pointer',
+                borderBottom: activeTab === i ? `2px solid ${GOLD}` : '2px solid transparent',
+                transition: 'color 0.2s, border-color 0.2s',
+              }}>
+                {label}
+              </button>
+            ))}
           </div>
 
         </div>
 
-        {/* Premium CTA */}
-        <div style={{ marginTop: 20, textAlign: 'center', padding: '1.5rem', background: 'rgba(212,175,55,0.05)', border: '1px solid rgba(212,175,55,0.15)', borderRadius: 10 }}>
-          <p style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 13, letterSpacing: '0.1em', marginBottom: 12 }}>
-            Подключите аналитику к данным вашего предприятия
-          </p>
-          <p style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(212,175,55,0.6)', fontSize: 12, marginBottom: 16 }}>
-            Интеграция с вашей ERP / 1С · AI-прогноз отказов · Индивидуальные дашборды
-          </p>
-          <a href="#contact" className="btn-imperial" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 32px', fontSize: 11 }}>
-            Получить демо-доступ →
-          </a>
-        </div>
 
       </div>
     </section>

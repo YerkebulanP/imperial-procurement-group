@@ -27,11 +27,22 @@ export default function ContactForm() {
 
   return (
     <section id="contact" className="section-imperial">
+      <style>{`
+        @media (max-width: 1599px) {
+          .contact-left, .contact-right { padding: 1rem !important; }
+        }
+        @media (max-width: 1279px) {
+          .contact-left, .contact-right { padding: 0.85rem !important; }
+        }
+        @media (max-width: 899px) {
+          .contact-panel-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
       <div className="container">
 
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <p style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontSize: '10px', letterSpacing: '0.5em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+          <p style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontSize: '10px', letterSpacing: '0.5em', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
             Посольство
           </p>
           <h2 className="section-title">Укрепить границы бизнеса</h2>
@@ -48,10 +59,10 @@ export default function ContactForm() {
           <span className="panel-corner bl" />
           <span className="panel-corner br" />
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--line-soft)', position: 'relative', zIndex: 2 }}>
+          <div className="contact-panel-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--line-soft)', position: 'relative', zIndex: 2 }}>
 
             {/* Left: form */}
-            <div style={{ background: 'var(--bg-card)', padding: '3rem' }}>
+            <div className="contact-left" style={{ background: 'var(--bg-card)', padding: '1.2rem' }}>
               {status === 'success' ? (
                 <div style={{ textAlign: 'center', padding: '4rem 0' }}>
                   <div style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>🏛️</div>
@@ -68,7 +79,7 @@ export default function ContactForm() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="form-grid">
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
                     <div className="field-group">
                       <label className="field-label">Ваше имя *</label>
                       <input className="field-input" type="text" name="name" value={form.name} onChange={handleChange} required placeholder="Имя" />
@@ -91,7 +102,7 @@ export default function ContactForm() {
 
                   <div className="field-group">
                     <label className="field-label">Что нужно?</label>
-                    <textarea className="field-textarea" name="message" value={form.message} onChange={handleChange} rows={4} placeholder="Модель техники, нужные запчасти, объём..." />
+                    <textarea className="field-textarea" name="message" value={form.message} onChange={handleChange} rows={3} placeholder="Модель техники, нужные запчасти, объём..." />
                   </div>
 
                   {status === 'error' && (
@@ -114,23 +125,23 @@ export default function ContactForm() {
             </div>
 
             {/* Right: info */}
-            <div style={{ background: 'var(--bg-deep)', padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div className="contact-right" style={{ background: 'var(--bg-deep)', padding: '1.2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <h3 style={{ fontFamily: 'Cinzel, serif', fontWeight: 700, color: 'var(--text-main)', fontSize: '1.35rem', marginBottom: '2rem', letterSpacing: '0.01em' }}>
+                <h3 style={{ fontFamily: 'Cinzel, serif', fontWeight: 700, color: 'var(--text-main)', fontSize: '1.1rem', marginBottom: '0.9rem', letterSpacing: '0.01em' }}>
                   Все дороги ведут к нам
                 </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
                   {[
-                    { label: 'Телефон',      value: '+7 (XXX) XXX-XX-XX' },
-                    { label: 'Email',         value: 'info@imperial-pg.kz' },
-                    { label: 'Режим работы', value: 'Пн–Пт: 9:00 — 18:00' },
-                    { label: 'Локация',       value: 'Казахстан' },
+                    { label: 'Телефон', value: '+7 (747) 183-81-78' },
+                    { label: 'Email',         value: 'infoipgroup@mail.ru' },
+                    { label: 'Режим работы', value: <>Пн–Пт: 9:00 – 18:00</> },
+                    { label: 'Локация',       value: 'Казахстан, г. Астана' },
                   ].map((item) => (
-                    <div key={item.label} style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--line-soft)' }}>
-                      <span style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontSize: '9px', letterSpacing: '0.38em', textTransform: 'uppercase', display: 'block', marginBottom: '5px' }}>
+                    <div key={item.label} style={{ paddingBottom: '0.7rem', borderBottom: '1px solid var(--line-soft)' }}>
+                      <span style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontSize: '9px', letterSpacing: '0.38em', textTransform: 'uppercase', display: 'block', marginBottom: '3px' }}>
                         {item.label}
                       </span>
-                      <span style={{ color: 'var(--text-main)', fontSize: '1rem', fontWeight: 500 }}>
+                      <span style={{ color: 'var(--text-main)', fontSize: '0.9rem', fontWeight: 500 }}>
                         {item.value}
                       </span>
                     </div>
@@ -138,8 +149,8 @@ export default function ContactForm() {
                 </div>
               </div>
 
-              <div style={{ marginTop: '2rem', borderLeft: '2px solid var(--gold-3)', paddingLeft: '1.4rem' }}>
-                <p style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-2)', fontStyle: 'italic', fontSize: '0.88rem', lineHeight: 1.85, margin: '0 0 0.75rem' }}>
+              <div style={{ marginTop: '0.8rem', borderLeft: '2px solid var(--gold-3)', paddingLeft: '1rem' }}>
+                <p style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-2)', fontStyle: 'italic', fontSize: '0.8rem', lineHeight: 1.55, margin: '0 0 0.4rem' }}>
                   «Ни один триумф не начинался без разведки. Свяжитесь с нами — мы оценим ваши потребности и предложим стратегию снабжения.»
                 </p>
                 <div style={{ color: 'var(--text-dim)', fontSize: '10px', letterSpacing: '0.2em' }}>

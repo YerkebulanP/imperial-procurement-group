@@ -20,19 +20,21 @@ const T = {
 const MACHINES = [
   { id: 'excavator', label: 'Экскаватор', icon: '🚜', rate: 380, defaultVolume: 5000 },
   { id: 'bulldozer', label: 'Бульдозер',  icon: '🏗️', rate: 320, defaultVolume: 3000 },
-  { id: 'grader',    label: 'Грейдер',     icon: '🚧', rate: 290, defaultVolume: 2000 },
-  { id: 'crane',     label: 'Кран',        icon: '🏗️', rate: 450, defaultVolume:  500 },
-  { id: 'dumper',    label: 'Самосвал',    icon: '🚛', rate: 260, defaultVolume: 4000 },
-  { id: 'drill',     label: 'Буровая',     icon: '⚙️', rate: 520, defaultVolume:  200 },
+  { id: 'grader',    label: 'Грейдер',    icon: '🚧', rate: 290, defaultVolume: 2000 },
+  { id: 'crane',     label: 'Кран',       icon: '🏗️', rate: 450, defaultVolume:  500 },
+  { id: 'dumper',    label: 'Самосвал',   icon: '🚛', rate: 260, defaultVolume: 4000 },
+  { id: 'loader',    label: 'Погрузчик',  icon: '🚧', rate: 300, defaultVolume: 3500 },
+  { id: 'drill',     label: 'Буровая',    icon: '⚙️', rate: 520, defaultVolume:  200 },
 ]
 
 const BRANDS_BY_MACHINE = {
-  excavator: ['Komatsu','Caterpillar','Hitachi','Liebherr','Volvo CE','Doosan','Hyundai','Sany'],
-  bulldozer: ['Komatsu','Caterpillar','Liebherr','John Deere','Shantui','ЧЕТРА'],
-  grader:    ['Caterpillar','Komatsu','John Deere','Volvo CE','XCMG'],
-  crane:     ['Liebherr','Tadano','Manitowoc','Terex','XCMG','Kobelco'],
-  dumper:    ['Komatsu','Caterpillar','БелАЗ','Terex','Volvo CE','Scania'],
-  drill:     ['Atlas Copco','Sandvik','Epiroc','Boart Longyear','Furukawa'],
+  excavator: ['CAT','Komatsu','Hitachi','XCMG','Shantui','SDLG','Hyundai','Doosan','Volvo CE'],
+  bulldozer: ['CAT','Komatsu','Shantui','XCMG','SDLG','ЧЕТРА'],
+  grader:    ['CAT','Komatsu','XCMG','SDLG','Shantui'],
+  crane:     ['XCMG','Zoomlion','Liebherr','Tadano','Manitowoc','Terex'],
+  dumper:    ['CAT','Komatsu','XCMG','Shantui','БелАЗ','Hitachi'],
+  loader:    ['CAT','Komatsu','XCMG','SDLG','Shantui','Hitachi','LiuGong'],
+  drill:     ['Atlas Copco','Sandvik','Epiroc','Furukawa','Boart Longyear'],
 }
 
 const fmt = n => new Intl.NumberFormat('ru-RU').format(Math.round(n))
@@ -45,12 +47,12 @@ function InputRow({ icon, label, children }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        display: 'flex', alignItems: 'center', gap: 14,
-        padding: '12px 16px',
+        display: 'flex', alignItems: 'center', gap: 8,
+        padding: '4px 10px',
         background: hover ? 'rgba(25, 33, 50, 0.9)' : T.bgInput,
         border: `1px solid ${hover ? T.borderAcc : 'rgba(255,255,255,0.05)'}`,
         borderRadius: T.rxMd,
-        marginBottom: 8,
+        marginBottom: 3,
         opacity: 0.85,
         transition: 'background 0.18s, border-color 0.18s',
         cursor: 'default',
@@ -58,20 +60,20 @@ function InputRow({ icon, label, children }) {
     >
       {/* icon box */}
       <div style={{
-        width: 36, height: 36, flexShrink: 0,
+        width: 22, height: 22, flexShrink: 0,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         background: T.accentSoft,
-        borderRadius: 10,
-        fontSize: 17,
+        borderRadius: 6,
+        fontSize: 11,
       }}>
         {icon}
       </div>
 
       {/* label — fixed width */}
       <span style={{
-        flexShrink: 0, width: 160,
+        flexShrink: 0, width: 130,
         fontFamily: 'Inter, Montserrat, sans-serif',
-        fontSize: 12, fontWeight: 400,
+        fontSize: 11, fontWeight: 400,
         color: T.textSec,
       }}>{label}</span>
 
@@ -89,17 +91,17 @@ const selectStyle = {
   backgroundColor: 'rgba(0,0,0,0.35)',
   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23f59e0b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E")`,
   backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'right 10px center',
+  backgroundPosition: 'right 8px center',
   backgroundSize: '10px',
   border: '1px solid rgba(255,255,255,0.1)',
   borderRadius: 8,
   outline: 'none',
   color: T.textMain,
   fontFamily: 'Inter, Montserrat, sans-serif',
-  fontSize: 14, fontWeight: 600,
+  fontSize: 13, fontWeight: 600,
   cursor: 'pointer',
   appearance: 'none',
-  padding: '7px 30px 7px 12px',
+  padding: '5px 26px 5px 10px',
 }
 
 /* ── shared styles ── */
@@ -109,7 +111,7 @@ const numBoxStyle = {
   backgroundColor: 'rgba(0,0,0,0.35)',
   border: '1px solid rgba(255,255,255,0.1)',
   borderRadius: 8,
-  padding: '7px 12px',
+  padding: '5px 10px',
   boxSizing: 'border-box',
 }
 const numInputStyle = {
@@ -117,13 +119,13 @@ const numInputStyle = {
   background: 'transparent', border: 'none', outline: 'none',
   color: T.textMain,
   fontFamily: 'Inter, Montserrat, sans-serif',
-  fontSize: 14, fontWeight: 600,
+  fontSize: 13, fontWeight: 600,
   textAlign: 'right',
 }
 const numSuffixStyle = {
   fontFamily: 'Inter, Montserrat, sans-serif',
-  fontSize: 12, color: T.textSec,
-  marginLeft: 6, flexShrink: 0,
+  fontSize: 11, color: T.textSec,
+  marginLeft: 5, flexShrink: 0,
 }
 
 /* ── NumInput: клик очищает поле, blur восстанавливает если пусто ── */
@@ -183,7 +185,7 @@ function NumInput({ value, onChange, suffix, min = 0, max }) {
 /* ── Growing cumulative chart (grouped: без IPG vs с IPG) ── */
 function GrowingChart({ lossMonth, savedMonth }) {
   const labels = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек']
-  const H = 90, BW = 7, innerGap = 2, outerGap = 6
+  const H = 68, BW = 7, innerGap = 2, outerGap = 6
   const groupW = BW * 2 + innerGap
   const totalW = labels.length * (groupW + outerGap) - outerGap
   const maxVal = lossMonth * labels.length || 1
@@ -309,10 +311,28 @@ export default function Calculator() {
 
   return (
     <section id="calculator" className="section-imperial">
+      <style>{`
+        @media (max-width: 1599px) {
+          .calc-pane-l, .calc-pane-r { padding: 12px !important; }
+        }
+        @media (max-width: 1279px) {
+          .calc-pane-l, .calc-pane-r { padding: 10px !important; }
+        }
+        @media (max-width: 1023px) {
+          .calc-card { grid-template-columns: 1fr !important; }
+          .calc-pane-l {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+          }
+        }
+        @media (max-width: 599px) {
+          .calc-pane-l, .calc-pane-r { padding: 14px !important; }
+        }
+      `}</style>
       <div className="container" style={{ padding: '0 20px' }}>
 
         {/* ── Section header ── */}
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '0.8rem' }}>
           {/* <p style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontSize: '10px', letterSpacing: '0.5em', textTransform: 'uppercase', marginBottom: '1rem' }}>
             Управление надёжностью
           </p> */}
@@ -324,23 +344,23 @@ export default function Calculator() {
         </div>
 
         {/* ══ Main card ══ */}
-        <div style={card}>
+        <div style={card} className="calc-card">
 
           {/* ── LEFT ── */}
-          <div style={{ padding: 48, borderRight: `1px solid rgba(255,255,255,0.05)` }}>
+          <div className="calc-pane-l" style={{ padding: 14, borderRight: `1px solid rgba(255,255,255,0.05)` }}>
 
             {/* form-card */}
             <div style={{
               background: 'rgba(17, 24, 39, 0.38)',
               border: `1px solid rgba(255,255,255,0.06)`,
               borderRadius: T.rxLg,
-              padding: 28,
+              padding: 12,
             }}>
               <div style={{
                 fontFamily: 'Inter, Montserrat, sans-serif',
-                fontSize: 13, fontWeight: 700,
+                fontSize: 11, fontWeight: 700,
                 letterSpacing: '0.22em', textTransform: 'uppercase',
-                color: 'rgba(243,244,246,0.8)', marginBottom: 20,
+                color: 'rgba(243,244,246,0.8)', marginBottom: 8,
               }}>
                 Данные техники
               </div>
@@ -397,7 +417,7 @@ export default function Calculator() {
           </div>
 
           {/* ── RIGHT ── */}
-          <div style={{ padding: 48, display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div className="calc-pane-r" style={{ padding: 14, display: 'flex', flexDirection: 'column', gap: 8 }}>
 
             {/* results-header */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -424,49 +444,49 @@ export default function Calculator() {
             <div style={{
               background: 'rgba(239,68,68,0.08)',
               border: '1px solid rgba(239,68,68,0.3)',
-              borderRadius: T.rxLg, padding: '20px 22px',
+              borderRadius: T.rxLg, padding: '8px 12px',
             }}>
-              <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(239,68,68,0.7)', marginBottom: 8 }}>
+              <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(239,68,68,0.7)', marginBottom: 4 }}>
                 Потеряли за этот ремонт
               </div>
-              <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, color: '#ef4444', lineHeight: 1, letterSpacing: '-0.02em' }}>
+              <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 'clamp(1rem, 1.4vw, 1.5rem)', fontWeight: 800, color: '#ef4444', lineHeight: 1, letterSpacing: '-0.02em' }}>
                 {fmt(lossThisRepair)} тг
               </div>
-              <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 12, color: 'rgba(239,68,68,0.55)', marginTop: 8 }}>
+              <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 10, color: 'rgba(239,68,68,0.55)', marginTop: 4 }}>
                 {fmt(lossPerHour)} тг/ч × {repairHours} ч простоя
               </div>
             </div>
 
             {/* главные метрики — потери/мес и потери/год */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              <div style={{ background: 'rgba(251,146,60,0.06)', border: '1px solid rgba(251,146,60,0.25)', borderRadius: T.rxLg, padding: '20px 22px' }}>
-                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(251,146,60,0.7)', marginBottom: 10 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+              <div style={{ background: 'rgba(251,146,60,0.06)', border: '1px solid rgba(251,146,60,0.25)', borderRadius: T.rxMd, padding: '8px 10px' }}>
+                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(251,146,60,0.7)', marginBottom: 4 }}>
                   Потери / месяц
                 </div>
-                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontWeight: 800, color: T.danger, lineHeight: 1, letterSpacing: '-0.02em' }}>
+                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 'clamp(0.9rem, 1.2vw, 1.3rem)', fontWeight: 800, color: T.danger, lineHeight: 1, letterSpacing: '-0.02em' }}>
                   {fmt(lossMonth)}
                 </div>
-                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 12, color: 'rgba(251,146,60,0.5)', marginTop: 6 }}>тг / мес</div>
+                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 10, color: 'rgba(251,146,60,0.5)', marginTop: 3 }}>тг / мес</div>
               </div>
-              <div style={{ background: 'rgba(251,146,60,0.1)', border: `1px solid ${T.borderAcc}`, borderRadius: T.rxLg, padding: '20px 22px' }}>
-                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: T.accent, marginBottom: 10 }}>
+              <div style={{ background: 'rgba(251,146,60,0.1)', border: `1px solid ${T.borderAcc}`, borderRadius: T.rxMd, padding: '8px 10px' }}>
+                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: T.accent, marginBottom: 4 }}>
                   Потери / год
                 </div>
-                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontWeight: 800, color: T.accent, lineHeight: 1, letterSpacing: '-0.02em' }}>
+                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 'clamp(0.9rem, 1.2vw, 1.3rem)', fontWeight: 800, color: T.accent, lineHeight: 1, letterSpacing: '-0.02em' }}>
                   {fmt(lossYear)}
                 </div>
-                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 12, color: T.textSec, marginTop: 6 }}>тг / год</div>
+                <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 10, color: T.textSec, marginTop: 3 }}>тг / год</div>
               </div>
             </div>
 
             {/* экономия IPG */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 10 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 8 }}>
               {[
                 { label: 'Экономия с IPG / мес', value: savedMonth, sub: `если не ждать запчасти (−${Math.min(waitingDays, downtimeDays)} дн./мес)`, color: T.success, border: 'rgba(34,197,94,0.2)', bg: 'rgba(34,197,94,0.06)' },
               ].map(({ label, value, sub, color, border, bg }) => (
-                <div key={label} style={{ background: bg, border: `1px solid ${border}`, borderRadius: T.rxMd, padding: '14px 16px' }}>
-                  <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.textSec, marginBottom: 7 }}>{label}</div>
-                  <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: '1.1rem', fontWeight: 800, color }}>{fmt(value)}</div>
+                <div key={label} style={{ background: bg, border: `1px solid ${border}`, borderRadius: T.rxMd, padding: '8px 12px' }}>
+                  <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.textSec, marginBottom: 4 }}>{label}</div>
+                  <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: '1rem', fontWeight: 800, color }}>{fmt(value)}</div>
                   <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 10, color: T.textSec, marginTop: 3 }}>{sub}</div>
                 </div>
               ))}
@@ -476,32 +496,32 @@ export default function Calculator() {
             <div style={{
               background: 'rgba(17,24,39,0.38)',
               border: `1px solid rgba(255,255,255,0.06)`,
-              borderRadius: T.rxLg, padding: '20px 22px',
+              borderRadius: T.rxLg, padding: '8px 12px',
               flex: 1,
             }}>
-              <div style={{ marginBottom: 16 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-                  <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 13, fontWeight: 600, color: T.textMain }}>
+              <div style={{ marginBottom: 4 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                  <div style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 11, fontWeight: 600, color: T.textMain }}>
                     Динамика потерь за год
                   </div>
                   <div style={{
                     background: 'rgba(251,146,60,0.12)',
                     border: '1px solid rgba(251,146,60,0.25)',
-                    borderRadius: 20, padding: '2px 10px',
+                    borderRadius: 20, padding: '2px 8px',
                     fontFamily: 'Inter, Montserrat, sans-serif',
-                    fontSize: 11, fontWeight: 700, color: T.danger,
+                    fontSize: 10, fontWeight: 700, color: T.danger,
                   }}>
                     накопительно
                   </div>
                 </div>
-                <div style={{ display: 'flex', gap: 16 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <div style={{ width: 10, height: 10, borderRadius: 3, background: '#fb923c' }} />
-                    <span style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 11, color: T.textSec }}>Потери без IPG</span>
+                <div style={{ display: 'flex', gap: 12 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <div style={{ width: 8, height: 8, borderRadius: 2, background: '#fb923c' }} />
+                    <span style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 10, color: T.textSec }}>Потери без IPG</span>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <div style={{ width: 10, height: 10, borderRadius: 3, background: '#22c55e' }} />
-                    <span style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 11, color: T.textSec }}>Потери с IPG</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <div style={{ width: 8, height: 8, borderRadius: 2, background: '#22c55e' }} />
+                    <span style={{ fontFamily: 'Inter, Montserrat, sans-serif', fontSize: 10, color: T.textSec }}>Потери с IPG</span>
                   </div>
                 </div>
               </div>
@@ -511,7 +531,7 @@ export default function Calculator() {
             {/* CTA */}
             <a href="#contact" style={{
               display: 'block', textAlign: 'center',
-              padding: '14px 24px',
+              padding: '8px 20px',
               background: T.accent, color: '#111827',
               fontFamily: 'Inter, Montserrat, sans-serif',
               fontSize: 12, fontWeight: 700,

@@ -6,27 +6,27 @@ export default function Footer() {
     ['Калькулятор триумфа',  '#calculator'],
     ['Контакты',             '#contact'],
   ]
-  const brands = ['Komatsu', 'XCMG', 'CAT', 'Liebherr', 'Hitachi', 'Volvo', 'Doosan', 'JCB', 'Sandvik']
+  const brands = ['CAT', 'Komatsu', 'SDLG', 'XCMG', 'Shantui', 'Hitachi', 'Cummins']
 
   return (
     <footer style={{ position: 'relative', background: 'rgba(5, 4, 2, 0.78)' }}>
       <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent 0%, var(--gold-3) 30%, var(--gold-3) 70%, transparent 100%)' }} />
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 2rem 2.5rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '4rem', marginBottom: '3rem' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '1.8rem 2rem 1.2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '2rem', marginBottom: '1.2rem' }}>
 
           {/* Brand */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1.5rem' }}>
-              <div style={{ width: 44, height: 44, borderRadius: '50%', border: '1px solid var(--gold-3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <span style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontWeight: 700, fontSize: '1.2rem' }}>I</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.8rem' }}>
+              <div style={{ width: 34, height: 34, borderRadius: '50%', border: '1px solid var(--gold-3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontWeight: 700, fontSize: '1rem' }}>I</span>
               </div>
               <div>
                 <div style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontSize: '14px', letterSpacing: '0.3em', fontWeight: 700 }}>IMPERIAL</div>
                 <div style={{ fontFamily: 'Cinzel, serif', color: 'var(--text-dim)', fontSize: '10px', letterSpacing: '0.25em' }}>PROCUREMENT GROUP</div>
               </div>
             </div>
-            <p style={{ color: 'var(--text-dim)', fontSize: '0.9rem', lineHeight: 1.85, marginBottom: '2rem', maxWidth: '300px' }}>
+            <p style={{ color: 'var(--text-dim)', fontSize: '0.82rem', lineHeight: 1.55, marginBottom: '0.9rem', maxWidth: '300px' }}>
               Комплексное снабжение спецтехники — запчасти, фильтры, расходники.
               Строим на века. Снабжаем как империю.
             </p>
@@ -41,10 +41,10 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <div style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
+            <div style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '0.7rem' }}>
               Навигация
             </div>
-            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {links.map(([label, href]) => (
                 <li key={href}>
                   <a href={href} style={{ fontFamily: 'Cinzel, serif', color: 'var(--text-dim)', fontSize: '13px', textDecoration: 'none', letterSpacing: '0.06em', transition: 'color 0.2s' }}
@@ -59,14 +59,15 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <div style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
+            <div style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-3)', fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '0.7rem' }}>
               Контакты
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               {[
-                { label: 'Телефон', value: '+7 (XXX) XXX-XX-XX' },
-                { label: 'Email',   value: 'info@imperial-pg.kz' },
+                { label: 'Телефон', value: '+7 (747) 183-81-78' },
+                { label: 'Email',   value: 'infoipgroup@mail.ru' },
                 { label: 'Время',   value: 'Пн–Пт: 9:00–18:00' },
+                { label: 'Адрес',   value: 'Казахстан, г. Астана' },
               ].map((item) => (
                 <div key={item.label}>
                   <div style={{ fontFamily: 'Cinzel, serif', color: 'var(--gold-2)', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '3px' }}>
@@ -81,7 +82,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div style={{ paddingTop: '2rem', borderTop: '1px solid var(--line-soft)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
+        <div style={{ paddingTop: '0.8rem', borderTop: '1px solid var(--line-soft)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div style={{ fontFamily: 'Cinzel, serif', color: 'var(--text-dim)', fontSize: '11px', letterSpacing: '0.1em' }}>
             © {new Date().getFullYear()} Imperial Procurement Group. Все права защищены.
           </div>

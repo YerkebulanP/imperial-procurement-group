@@ -75,14 +75,14 @@ const axisStyle = {
 
 function ChartCard({ title, subtitle, children }) {
   return (
-    <div style={{
+    <div className="analytics-chart-card" style={{
       background: 'rgba(12, 9, 5, 0.72)',
       border: '1px solid rgba(212,175,55,0.18)',
       borderRadius: 12,
-      padding: '1.8rem',
+      padding: '1.1rem',
       display: 'flex',
       flexDirection: 'column',
-      gap: '1.2rem',
+      gap: '0.8rem',
     }}>
       <div>
         <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 4 }}>
@@ -100,10 +100,27 @@ function ChartCard({ title, subtitle, children }) {
 export default function Analytics() {
   return (
     <section id="analytics" className="section-imperial">
+      <style>{`
+        @media (max-width: 1599px) {
+          .analytics-charts-grid  { gap: 12px !important; }
+          .analytics-chart-card   { padding: 0.85rem !important; }
+          .analytics-premium-side { padding: 1.3rem !important; }
+        }
+        @media (max-width: 1279px) {
+          .analytics-chart-card   { padding: 0.75rem !important; }
+          .analytics-premium-side { padding: 1.1rem !important; }
+        }
+        @media (max-width: 899px) {
+          .analytics-charts-grid  { grid-template-columns: 1fr !important; }
+          .analytics-premium-grid { grid-template-columns: 1fr !important; }
+          .analytics-premium-blur { display: none !important; }
+          .analytics-premium-side { border-right: none !important; }
+        }
+      `}</style>
       <div className="container">
 
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <p style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: '10px', letterSpacing: '0.5em', textTransform: 'uppercase', marginBottom: '1rem' }}>
             Данные и статистика
           </p>
@@ -115,7 +132,7 @@ export default function Analytics() {
         </div>
 
         {/* Charts grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+        <div className="analytics-charts-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
 
           {/* Chart 1 — Накопленные потери */}
           <ChartCard
@@ -195,10 +212,10 @@ export default function Analytics() {
           {/* gold top line */}
           <div style={{ height: 2, background: `linear-gradient(90deg, transparent, ${GOLD}, transparent)` }} />
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
+          <div className="analytics-premium-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
 
             {/* Left — blurred demo charts */}
-            <div style={{ padding: '2.5rem', borderRight: '1px solid rgba(212,175,55,0.12)', filter: 'blur(3px)', pointerEvents: 'none', opacity: 0.5 }}>
+            <div className="analytics-premium-side analytics-premium-blur" style={{ padding: '1.6rem', borderRight: '1px solid rgba(212,175,55,0.12)', filter: 'blur(3px)', pointerEvents: 'none', opacity: 0.5 }}>
               <div style={{ fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 12, letterSpacing: '0.15em', marginBottom: 12 }}>AI ПРОГНОЗ ОТКАЗОВ</div>
               <ResponsiveContainer width="100%" height={140}>
                 <AreaChart data={savingsData.slice(0, 8)}>
@@ -216,7 +233,7 @@ export default function Analytics() {
             </div>
 
             {/* Right — Premium info */}
-            <div style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '1.2rem' }}>
+            <div className="analytics-premium-side" style={{ padding: '1.6rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '0.9rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <div style={{ padding: '4px 12px', background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.4)', borderRadius: 20, fontFamily: 'Cinzel, serif', color: GOLD, fontSize: 10, letterSpacing: '0.3em' }}>
                   PREMIUM

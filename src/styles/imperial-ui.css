@@ -30,7 +30,7 @@
 /* ── Карточки ── */
 .imperial-card {
   position: relative;
-  padding: 28px;
+  padding: 18px;
   border-radius: var(--radius-md);
   background: var(--bg-card);
   border: 1px solid rgba(212, 175, 55, 0.18);
@@ -45,9 +45,9 @@
 }
 
 .imperial-card-title {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   font-family: "Cinzel", serif;
-  font-size: clamp(18px, 1.8vw, 26px);
+  font-size: clamp(13px, 1.1vw, 16px);
   font-weight: 700;
   line-height: 1.15;
   color: var(--gold-4);
@@ -57,6 +57,20 @@
   margin: 0;
   color: var(--text-soft);
   font-family: "Montserrat", sans-serif;
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ── FullHD / Laptop wide (< 1600px) ── */
+@media (max-width: 1599px) {
+  .imperial-card       { padding: 14px; }
+  .imperial-card-title { font-size: clamp(12px, 1vw, 14px); }
+  .imperial-card-text  { font-size: 12px; }
+}
+
+/* ── Ноутбук (< 1280px) ── */
+@media (max-width: 1279px) {
+  .imperial-card       { padding: 12px; }
+  .imperial-card-title { font-size: clamp(11px, 0.9vw, 13px); }
+  .imperial-card-text  { font-size: 11px; }
 }
